@@ -37,10 +37,10 @@ uint8_t LM75B_Read(uint8_t mem_addr, uint8_t data[], uint16_t len)
 
 uint8_t LM75B_Reset_Conf(void)
 {
-    return LM75B_Write_Conf(0x00);
+    return LM75B_Init(0x00);
 }
 
-uint8_t LM75B_Write_Conf(uint8_t conf)
+uint8_t LM75B_Init(uint8_t conf)
 {
     I2C_TX_DATA[0] = conf & 0x1F;
     if (LM75B_Write(LM75B_CONF_REG, I2C_TX_DATA, 1))
