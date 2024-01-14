@@ -10,6 +10,7 @@
         "stdint.h": "c",
         "stm32f1xx_hal_conf.h": "c",
         "winapifamily.h": "c",
-        "stm32f1xx_hal_gpio.h": "c"
+        "stm32f1xx_hal_gpio.h": "c",
+        "syscall.h": "c"
     },
 }
