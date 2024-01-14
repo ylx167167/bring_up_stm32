@@ -19,10 +19,11 @@
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+
 #include "cmsis_os.h"
 #include "gpio.h"
 #include <stdio.h>
+#include "custom/time.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -89,8 +90,17 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  /* USER CODE BEGIN 2 */
 
+  /* USER CODE BEGIN 2 */
+  while (1)
+  {
+    /* USER CODE END WHILE */
+    Set_GPIO_Bit(13, 0);
+    delay_ms_soft(500);
+    Set_GPIO_Bit(13, 1);
+    delay_ms_soft(500);
+    /* USER CODE BEGIN 3 */
+  }
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */
@@ -101,12 +111,15 @@ int main(void)
   /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-    /* USER CODE END WHILE */
-
-    /* USER CODE BEGIN 3 */
-  }
+  // while (1)
+  // {
+  //   /* USER CODE END WHILE */
+  //   Set_GPIO_Bit(13, 0);
+  //   delay_ms_soft(500);
+  //   Set_GPIO_Bit(13, 1);
+  //   delay_ms_soft(500);
+  //   /* USER CODE BEGIN 3 */
+  // }
   /* USER CODE END 3 */
 }
 

@@ -1,21 +1,21 @@
 /**
-  ******************************************************************************
-  * File Name          : gpio.c
-  * Description        : This file provides code for the configuration
-  *                      of all used GPIO pins.
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2024 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * File Name          : gpio.c
+ * Description        : This file provides code for the configuration
+ *                      of all used GPIO pins.
+ ******************************************************************************
+ * @attention
+ *
+ * <h2><center>&copy; Copyright (c) 2024 STMicroelectronics.
+ * All rights reserved.</center></h2>
+ *
+ * This software component is licensed by ST under Ultimate Liberty license
+ * SLA0044, the "License"; You may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at:
+ *                             www.st.com/SLA0044
+ *
+ ******************************************************************************
+ */
 
 /* Includes ------------------------------------------------------------------*/
 #include "gpio.h"
@@ -30,13 +30,13 @@
 
 /* USER CODE END 1 */
 
-/** Configure pins as 
-        * Analog 
-        * Input 
-        * Output
-        * EVENT_OUT
-        * EXTI
-*/
+/** Configure pins as
+ * Analog
+ * Input
+ * Output
+ * EVENT_OUT
+ * EXTI
+ */
 void MX_GPIO_Init(void)
 {
 
@@ -56,11 +56,22 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
 }
 
 /* USER CODE BEGIN 2 */
-
+void Set_GPIO_Bit(uint32_t pin, uint32_t bit)
+{
+  uint16_t _pin = 0;
+  switch (pin)
+  {
+  case 13:
+    _pin = GPIO_PIN_13;
+    break;
+  default:
+    return;
+  }
+  bit == 0 ? HAL_GPIO_WritePin(GPIOC, _pin, GPIO_PIN_RESET) : HAL_GPIO_WritePin(GPIOC, _pin, GPIO_PIN_SET);
+}
 /* USER CODE END 2 */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
