@@ -1,0 +1,8 @@
+{
+    "files.autoGuessEncoding": true,
+    "files.associations": {
+        "cmsis_os.h": "c",
+        "gpio.h": "c",
+        "main.h": "c"
+    },
+}
