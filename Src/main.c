@@ -4,6 +4,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "cmsis_os.h"
+#include "adc.h"
 #include "i2c.h"
 #include "gpio.h"
 
@@ -13,6 +14,7 @@
 #include "custom/syscall.h"
 #include "custom/lm75.h"
 #include "custom/mpu6500.h"
+#include "custom/adc_vcc.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -48,6 +50,7 @@ uint16_t tos;
 uint8_t temp_flag;
 uint8_t thyst_flag;
 uint8_t tos_flag;
+float adc_vcc;
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -87,6 +90,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_I2C1_Init();
+  MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
   LM75B_Init(0x00); // 初始化LM25B
   MPU6500_Init();   // 初始化mpu6500
@@ -96,6 +100,7 @@ int main(void)
   temp_flag = FALSE;
   thyst_flag = FALSE;
   tos_flag = FALSE;
+  adc_vcc = 0;
   while (1)
   {
     Set_GPIO_Bit(4, 0);
@@ -109,6 +114,7 @@ int main(void)
     delay_ms_soft(100);
     tos_flag = LM75B_Read_TOS(&tos);
     delay_ms_soft(100);
+    adc_vcc = adc_get_vcc();
   }
   /* USER CODE END 2 */
 
@@ -137,6 +143,7 @@ void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
   /** Initializes the CPU, AHB and APB busses clocks
    */
@@ -157,6 +164,12 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC;
+  PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV2;
+  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
     Error_Handler();
   }

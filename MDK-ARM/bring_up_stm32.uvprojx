@@ -341,7 +341,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xB</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;        ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;        ../Drivers/STM32F1xx_HAL_Driver/Inc;        ../Middlewares/Third_Party/FreeRTOS/Source/include;        ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;        ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3;        ../Drivers/CMSIS/Device/ST/STM32F1xx/Include;        ../Drivers/CMSIS/Include</IncludePath>
+              <IncludePath>../Inc;         ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;         ../Drivers/STM32F1xx_HAL_Driver/Inc;         ../Middlewares/Third_Party/FreeRTOS/Source/include;         ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;         ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3;         ../Drivers/CMSIS/Device/ST/STM32F1xx/Include;         ../Drivers/CMSIS/Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -406,6 +406,11 @@
               <FilePath>../Src/gpio.c</FilePath>
             </File>
             <File>
+              <FileName>adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Src/adc.c</FilePath>
+            </File>
+            <File>
               <FileName>freertos.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Src/freertos.c</FilePath>
@@ -434,6 +439,16 @@
               <FileName>stm32f1xx_hal_gpio_ex.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_hal_adc_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c</FilePath>
             </File>
             <File>
               <FileName>stm32f1xx_hal.c</FileName>
@@ -584,6 +599,11 @@
               <FileName>mpu6500.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\custom\mpu6500.c</FilePath>
+            </File>
+            <File>
+              <FileName>adc_vcc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\custom\adc_vcc.c</FilePath>
             </File>
           </Files>
         </Group>
