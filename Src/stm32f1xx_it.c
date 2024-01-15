@@ -26,10 +26,13 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "gpio.h"
+#include "tim.h"
+
 static int c = 0;
 static int c3 = 0;
-static int i3 = 0; // 呼吸灯的占空比会动态变化
+static int i3 = 0; // 呼吸灯的占空比会动�?�变�?
 static int ucLCK = 0;
+static int ulTick = 0;
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -165,7 +168,7 @@ void DebugMon_Handler(void)
 void SysTick_Handler(void)
 {
   /* USER CODE BEGIN SysTick_IRQn 0 */
-
+  // ulTick++;
   /* USER CODE END SysTick_IRQn 0 */
   HAL_IncTick();
 #if (INCLUDE_xTaskGetSchedulerState == 1)
@@ -177,7 +180,7 @@ void SysTick_Handler(void)
   }
 #endif /* INCLUDE_xTaskGetSchedulerState */
   /* USER CODE BEGIN SysTick_IRQn 1 */
-
+  ulTick++;
   /* USER CODE END SysTick_IRQn 1 */
 }
 
@@ -222,7 +225,7 @@ void DMA1_Channel1_IRQHandler(void)
 void TIM2_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM2_IRQn 0 */
-#if 1
+#if 0
   if (c == 0)
   {
     Set_GPIO_Bit(13, 0);
@@ -247,9 +250,10 @@ void TIM2_IRQHandler(void)
  */
 void TIM3_IRQHandler(void)
 {
+
   /* USER CODE BEGIN TIM3_IRQn 0 */
 #if 0
-  if (ucLCK++ % 799 == 0) // 给i的变化做了延迟 怎么计算我也不知道
+  if (ucLCK++ % 799 == 0) // 给i的变化做了延�? 怎么计算我也不知�?
   {
     i3++;
     if (i3 == 10)
@@ -265,6 +269,16 @@ void TIM3_IRQHandler(void)
     Set_GPIO_Bit(13, 0);
   }
 #endif
+  if (__HAL_TIM_GET_FLAG(&htim3, TIM_FLAG_UPDATE) != RESET)
+  {
+    Set_GPIO_Bit(13, 1);
+    __HAL_TIM_CLEAR_IT(&htim3, TIM_IT_UPDATE);
+  }
+  else if (__HAL_TIM_GET_FLAG(&htim3, TIM_FLAG_CC3) != RESET)
+  {
+    Set_GPIO_Bit(13, 0);
+    __HAL_TIM_CLEAR_IT(&htim3, TIM_IT_CC3);
+  }
 
   /* USER CODE END TIM3_IRQn 0 */
   HAL_TIM_IRQHandler(&htim3);
@@ -274,6 +288,18 @@ void TIM3_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
+static int Compare2 = 100;
+void led_pwm_tim3(void)
+{
+  ulTick++;
+  if (ulTick % 1000 == 0)
+  {
+    Compare2 += 50;
+    if (Compare2 > 999)
+      Compare2 = 100;
 
+    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, Compare2);
+  }
+}
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

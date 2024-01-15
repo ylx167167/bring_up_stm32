@@ -40,12 +40,12 @@
 void SystemClock_Config(void);
 void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN PFP */
-// static uint16_t temp = 0;
-// static uint16_t thyst = 0;
-// static uint16_t tos = 0;
-// static uint8_t temp_flag = FALSE;
-// static uint8_t thyst_flag = FALSE;
-// static uint8_t tos_flag = FALSE;
+static uint16_t temp = 0;
+static uint16_t thyst = 0;
+static uint16_t tos = 0;
+static uint8_t temp_flag = FALSE;
+static uint8_t thyst_flag = FALSE;
+static uint8_t tos_flag = FALSE;
 uint16_t temp;
 uint16_t thyst;
 uint16_t tos;
@@ -57,7 +57,7 @@ float adc_vcc;
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-/*!SWO 串口调用*/
+/*!SWO ä¸˛ĺŁč°ç¨*/
 int fputc(int ch, FILE *f)
 {
   ITM_SendChar(ch);
@@ -97,10 +97,10 @@ int main(void)
   MX_TIM2_Init();
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_Base_Start_IT(&htim2); // # 启动定时器二 HAL_TIM_PWM_Start(TIM_HandleTypeDef *htim, uint32_t Channel);用于�?启特定�?�道
-  HAL_TIM_Base_Start_IT(&htim3); // # 启动定时器三
-  LM75B_Init(0x00);              // 初始化LM25B
-  MPU6500_Init();                // 初始化mpu6500
+  HAL_TIM_Base_Start_IT(&htim2); // # ĺŻĺ¨ĺŽćśĺ¨äş HAL_TIM_PWM_Start(TIM_HandleTypeDef *htim, uint32_t Channel);ç¨äşĺź?ĺŻçšĺŽé?é
+  HAL_TIM_Base_Start_IT(&htim3); // # ĺŻĺ¨ĺŽćśĺ¨ä¸
+  LM75B_Init(0x00);              // ĺĺ§ĺLM25B
+  MPU6500_Init();                // ĺĺ§ĺmpu6500
   temp = 0;
   thyst = 0;
   tos = 0;
@@ -115,7 +115,7 @@ int main(void)
     delay_ms_soft(500);
     Set_GPIO_Bit(4, 1);
     delay_ms_soft(500);
-    /*! lm75读取次温湿度 读取要有间隔*/
+    /*! lm75čŻťĺćŹĄć¸ŠćšżĺşŚ čŻťĺčŚćé´é*/
     temp_flag = LM75B_Read_Temp(&temp);
     delay_ms_soft(100);
     thyst_flag = LM75B_Read_THYST(&thyst);
@@ -124,6 +124,7 @@ int main(void)
     delay_ms_soft(100);
     adc_vcc = adc_get_vcc();
 #endif
+    led_pwm_tim3();
   }
   /* USER CODE END 2 */
 

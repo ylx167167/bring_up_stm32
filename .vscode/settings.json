@@ -15,6 +15,7 @@
         "lm75.h": "c",
         "i2c.h": "c",
         "compare": "c",
-        "tim.h": "c"
+        "tim.h": "c",
+        "stm32f1xx_hal_tim.h": "c"
     },
 }
