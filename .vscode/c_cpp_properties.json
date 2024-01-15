@@ -4,17 +4,21 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "F:/project/stm32/mingw64/x86_64-w64-mingw32/include",
-                "F:/project/stm32/bring_up_stm32/Inc",
-                "F:/project/stm32/bring_up_stm32/Drivers/STM32F1xx_HAL_Driver/Inc",
+                "D:/MingGW/mingw64/x86_64-w64-mingw32/include",
+                "${workspaceFolder}/Inc",
+                "${workspaceFolder}/Drivers/STM32F1xx_HAL_Driver/Inc"
             ],
             "defines": [],
             "cStandard": "c99",
             "cppStandard": "c++11",
-            "compilerPath": "F:/project/stm32/mingw64/bin/gcc",
+            "compilerPath": "D:/MingGW/mingw64/bin/gcc",
             // "intelliSenseMode": "linux-gcc-x64"
             "intelliSenseMode": "windows-gcc-x64"
         }
     ],
     "version": 4
 }
+// "F:/project/stm32/mingw64/x86_64-w64-mingw32/include",
+// "${workspaceFolder}/Inc",
+// "${workspaceFolder}/Drivers/STM32F1xx_HAL_Driver/Inc",
+
