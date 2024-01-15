@@ -27,6 +27,9 @@
 /* USER CODE BEGIN Includes */
 #include "gpio.h"
 static int c = 0;
+static int c3 = 0;
+static int i3 = 0; // 呼吸灯的占空比会动态变化
+static int ucLCK = 0;
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -62,6 +65,7 @@ static int c = 0;
 /* External variables --------------------------------------------------------*/
 extern DMA_HandleTypeDef hdma_adc1;
 extern TIM_HandleTypeDef htim2;
+extern TIM_HandleTypeDef htim3;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -215,10 +219,10 @@ void DMA1_Channel1_IRQHandler(void)
 /**
  * @brief This function handles TIM2 global interrupt.
  */
-
 void TIM2_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM2_IRQn 0 */
+#if 1
   if (c == 0)
   {
     Set_GPIO_Bit(13, 0);
@@ -229,12 +233,44 @@ void TIM2_IRQHandler(void)
     c = 0;
     Set_GPIO_Bit(13, 1);
   }
+#endif
 
   /* USER CODE END TIM2_IRQn 0 */
   HAL_TIM_IRQHandler(&htim2);
   /* USER CODE BEGIN TIM2_IRQn 1 */
 
   /* USER CODE END TIM2_IRQn 1 */
+}
+
+/**
+ * @brief This function handles TIM3 global interrupt.
+ */
+void TIM3_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM3_IRQn 0 */
+#if 0
+  if (ucLCK++ % 799 == 0) // 给i的变化做了延迟 怎么计算我也不知道
+  {
+    i3++;
+    if (i3 == 10)
+      i3 = 0;
+  }
+  c3++;
+  if (c3 % 10 < i3)
+  {
+    Set_GPIO_Bit(13, 1);
+  }
+  else
+  {
+    Set_GPIO_Bit(13, 0);
+  }
+#endif
+
+  /* USER CODE END TIM3_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim3);
+  /* USER CODE BEGIN TIM3_IRQn 1 */
+
+  /* USER CODE END TIM3_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */

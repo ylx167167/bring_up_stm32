@@ -95,8 +95,10 @@ int main(void)
   MX_I2C1_Init();
   MX_ADC1_Init();
   MX_TIM2_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_Base_Start_IT(&htim2); // # 启动定时器二
+  HAL_TIM_Base_Start_IT(&htim2); // # 启动定时器二 HAL_TIM_PWM_Start(TIM_HandleTypeDef *htim, uint32_t Channel);用于�?启特定�?�道
+  HAL_TIM_Base_Start_IT(&htim3); // # 启动定时器三
   LM75B_Init(0x00);              // 初始化LM25B
   MPU6500_Init();                // 初始化mpu6500
   temp = 0;
@@ -108,18 +110,20 @@ int main(void)
   adc_vcc = 0;
   while (1)
   {
-    // Set_GPIO_Bit(4, 0);
-    // delay_ms_soft(500);
-    // Set_GPIO_Bit(4, 1);
-    // delay_ms_soft(500);
-    // /*! lm75读取次温湿度 读取要有间隔*/
-    // temp_flag = LM75B_Read_Temp(&temp);
-    // delay_ms_soft(100);
-    // thyst_flag = LM75B_Read_THYST(&thyst);
-    // delay_ms_soft(100);
-    // tos_flag = LM75B_Read_TOS(&tos);
-    // delay_ms_soft(100);
-    // adc_vcc = adc_get_vcc();
+#if 0
+    Set_GPIO_Bit(4, 0);
+    delay_ms_soft(500);
+    Set_GPIO_Bit(4, 1);
+    delay_ms_soft(500);
+    /*! lm75读取次温湿度 读取要有间隔*/
+    temp_flag = LM75B_Read_Temp(&temp);
+    delay_ms_soft(100);
+    thyst_flag = LM75B_Read_THYST(&thyst);
+    delay_ms_soft(100);
+    tos_flag = LM75B_Read_TOS(&tos);
+    delay_ms_soft(100);
+    adc_vcc = adc_get_vcc();
+#endif
   }
   /* USER CODE END 2 */
 
@@ -184,6 +188,7 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+
 /* USER CODE END 4 */
 
 /**
