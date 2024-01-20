@@ -4,7 +4,8 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "D:/MingGW/mingw64/x86_64-w64-mingw32/include",
+                // "D:/MingGW/mingw64/x86_64-w64-mingw32/include",
+                "D://STM32//MDK_KEIL//ARM//arm_compiler//include",
                 "${workspaceFolder}/Inc",
                 "${workspaceFolder}/Drivers/STM32F1xx_HAL_Driver/Inc"
             ],
@@ -21,4 +22,3 @@
 // "F:/project/stm32/mingw64/x86_64-w64-mingw32/include",
 // "${workspaceFolder}/Inc",
 // "${workspaceFolder}/Drivers/STM32F1xx_HAL_Driver/Inc",
-
