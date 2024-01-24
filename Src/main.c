@@ -5,6 +5,7 @@
 #include "main.h"
 #include "cmsis_os.h"
 #include "adc.h"
+#include "can.h"
 #include "dma.h"
 #include "i2c.h"
 #include "tim.h"
@@ -18,6 +19,7 @@
 #include "custom/lm75.h"
 #include "custom/mpu6500.h"
 #include "custom/adc_vcc.h"
+#include "custom/can_diy.h"
 
 /* USER CODE END Includes */
 
@@ -55,6 +57,12 @@ uint8_t temp_flag;
 uint8_t thyst_flag;
 uint8_t tos_flag;
 float adc_vcc;
+
+CAN_TxHeaderTypeDef Can_Tx;
+CAN_RxHeaderTypeDef Can_Rx;
+uint8_t Rxdata[8];       // CAN?????
+uint8_t Txdata[8] = {0}; // CAN?????
+extern uint8_t can_rx_finish_flag;
 // RetargetInit(&huart1);
 
 /* USER CODE END PFP */
@@ -68,9 +76,9 @@ int fputc(int ch, FILE *f)
 }
 uint16_t pwm = 0;
 /*****************************************************
- *function: 读字符文件函�?
+ *function: 读字符文件函�??
  *param1: 文件指针
- *return: 读取字符�? ASCII �?
+ *return: 读取字符�?? ASCII �??
  ******************************************************/
 int fgetc(FILE *f)
 {
@@ -110,6 +118,7 @@ int main(void)
   MX_ADC1_Init();
   MX_TIM2_Init();
   MX_TIM3_Init();
+  MX_CAN_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   // HAL_TIM_Base_Start_IT(&htim2); // # ĺŻĺ¨ĺŽćśĺ¨äş HAL_TIM_PWM_Start(TIM_HandleTypeDef *htim, uint32_t Channel);ç¨äşĺź?ĺŻçšĺŽé?é
@@ -117,6 +126,8 @@ int main(void)
   LM75B_Init(0x00); // ĺĺ§ĺLM25B
   MPU6500_Init();   // ĺĺ§ĺmpu6500
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);
+  Can_User_Init();
+
   temp = 0;
   thyst = 0;
   tos = 0;
@@ -140,6 +151,7 @@ int main(void)
     tos_flag = LM75B_Read_TOS(&tos);
     delay_ms_soft(100);
     adc_vcc = adc_get_vcc();
+
 #endif
 #if 0
 //  uart ??
@@ -151,7 +163,7 @@ int main(void)
       printf("\r\nHello World.");
     }
 #endif
-    // #if 0
+#if 0
     // pwm??
     while (pwm < 500)
     {
@@ -165,14 +177,23 @@ int main(void)
       __HAL_TIM_SetCompare(&htim2, TIM_CHANNEL_2, pwm);
       delay_ms_soft(2);
     }
-    // #endif
-    // // ??????????
-    // delay_ms_soft(200);
-    // // Set_GPIO_Bit(4, 1);
-    // HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_RESET);
-    // delay_ms_soft(200);
-    // // Set_GPIO_Bit(4, 0);
-    // HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_SET);
+#endif
+
+    Txdata[0] = 0x01;
+    Txdata[1] = 0x01;
+    Txdata[2] = 0x04;
+
+    sendOrder(0x123, 0x13550151, CAN_ID_EXT, 0, 3);
+    printf("over\r\n");
+
+    delay_ms_soft(2000);
+    //  // ??????????
+    //  delay_ms_soft(200);
+    //  // Set_GPIO_Bit(4, 1);
+    //  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_RESET);
+    //  delay_ms_soft(200);
+    //  // Set_GPIO_Bit(4, 0);
+    //  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_SET);
   }
 
   /* USER CODE END 2 */
