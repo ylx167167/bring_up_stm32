@@ -7,7 +7,9 @@
 * 使能PB6 PB7的I2C1 读取lm75b温湿度传感器
 * 增加mpu6500驱动代码 功能待完善
 * 使能ADC1的A1 A0两个通道 ，实现单通道电压采集
-# 2024年1月15日
+* 在stm32上方针巴特沃斯滤波器
+* 实现can通信
+* 运行freeRtos
 ### ADC
 ~~~
 https://blog.csdn.net/m0_49968063/article/details/131121486
@@ -47,5 +49,6 @@ PWM生成功能： 定时器可以配置为产生脉冲宽度调制（PWM）信�
     普通IO模拟PWM: TIM3 有三种方式：定时器中断，计数溢出+中断（失败）
 ~~~
 
-* 
+* 练习freertos
+https://zhuanlan.zhihu.com/p/115010977
   

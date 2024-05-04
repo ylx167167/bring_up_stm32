@@ -6,8 +6,8 @@
 void Can_User_Init(void);
 
 void sendmessage(uint32_t StdId, uint32_t ExtId, uint8_t IDE, uint8_t RTR, uint8_t DLC, float send_data);
-
 void sendmessage(uint32_t StdId, uint32_t ExtId, uint8_t IDE, uint8_t RTR, uint8_t DLC, float send_data);
-void sendOrder(uint32_t StdId, uint32_t ExtId, uint8_t IDE, uint8_t RTR, uint8_t DLC);
-
+void sendOrder(uint32_t StdId, uint32_t ExtId, uint8_t IDE, uint8_t RTR, uint8_t DLC, uint8_t *Txd);
+uint32_t CAN_TX_Message(uint8_t TxData[], uint8_t length);
+uint8_t CAN1_Send_Msg(CANTxMsg_t *msg, uint16_t mailbox_id, uint8_t *sendbuff);
 #endif

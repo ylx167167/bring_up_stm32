@@ -1,5 +1,6 @@
 {
     "files.autoGuessEncoding": true,
+    "files.encoding": "utf8",
     "files.associations": {
         "cmsis_os.h": "c",
         "gpio.h": "c",
@@ -71,6 +72,18 @@
         "_mingw_mac.h": "c",
         "_mingw_secapi.h": "c",
         "dac.h": "c",
-        "can_diy.h": "c"
+        "can_diy.h": "c",
+        "adc.h": "c",
+        "filter.h": "c",
+        "bwfilter.h": "c",
+        "sin_form.h": "c",
+        "sin.h": "c",
+        "canlocal.h": "c",
+        "can.h": "c",
+        "stdlib.h": "c",
+        "froslocal.h": "c",
+        "myapp.h": "c",
+        "dma.h": "c"
     },
+    "C_Cpp.clang_format_fallbackStyle": "Microsoft"
 }

@@ -112,8 +112,8 @@
         <DllOption>
           <SimDllName>SARMCM3.DLL</SimDllName>
           <SimDllArguments>-REMAP</SimDllArguments>
-          <SimDlgDll>DCM.DLL</SimDlgDll>
-          <SimDlgDllArguments>-pCM3</SimDlgDllArguments>
+          <SimDlgDll>DARMSTM.DLL</SimDlgDll>
+          <SimDlgDllArguments>-pSTM32F103C8</SimDlgDllArguments>
           <TargetDllName>SARMCM3.DLL</TargetDllName>
           <TargetDllArguments></TargetDllArguments>
           <TargetDlgDll>TCM.DLL</TargetDlgDll>
@@ -341,7 +341,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xB</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;                 ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;                 ../Drivers/STM32F1xx_HAL_Driver/Inc;                 ../Middlewares/Third_Party/FreeRTOS/Source/include;                 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;                 ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3;                 ../Drivers/CMSIS/Device/ST/STM32F1xx/Include;                 ../Drivers/CMSIS/Include</IncludePath>
+              <IncludePath>../Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/STM32F1xx_HAL_Driver/Inc;..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;..\Src\math;..\Src\custom</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -421,11 +421,6 @@
               <FilePath>../Src/dma.c</FilePath>
             </File>
             <File>
-              <FileName>freertos.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Src/freertos.c</FilePath>
-            </File>
-            <File>
               <FileName>i2c.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Src/i2c.c</FilePath>
@@ -449,6 +444,11 @@
               <FileName>stm32f1xx_hal_msp.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Src/stm32f1xx_hal_msp.c</FilePath>
+            </File>
+            <File>
+              <FileName>myapp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\myapp.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -596,11 +596,6 @@
               <FilePath>../Middlewares/Third_Party/FreeRTOS/Source/timers.c</FilePath>
             </File>
             <File>
-              <FileName>cmsis_os.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c</FilePath>
-            </File>
-            <File>
               <FileName>heap_4.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c</FilePath>
@@ -611,9 +606,9 @@
               <FilePath>../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3/port.c</FilePath>
             </File>
             <File>
-              <FileName>can_diy.c</FileName>
+              <FileName>cmsis_os2.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Src\custom\can_diy.c</FilePath>
+              <FilePath>..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2\cmsis_os2.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -639,6 +634,36 @@
               <FileName>adc_vcc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\custom\adc_vcc.c</FilePath>
+            </File>
+            <File>
+              <FileName>canLocal.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\custom\canLocal.c</FilePath>
+            </File>
+            <File>
+              <FileName>frosLocal.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\custom\frosLocal.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Application/Math</GroupName>
+          <Files>
+            <File>
+              <FileName>filter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\math\filter.c</FilePath>
+            </File>
+            <File>
+              <FileName>BwFilter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\math\BwFilter.c</FilePath>
+            </File>
+            <File>
+              <FileName>sin.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\math\sin.c</FilePath>
             </File>
           </Files>
         </Group>

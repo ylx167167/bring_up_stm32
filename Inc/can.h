@@ -39,7 +39,17 @@ extern CAN_HandleTypeDef hcan;
 void MX_CAN_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-
+  typedef struct
+  {
+    uint32_t mailbox;
+    CAN_TxHeaderTypeDef TxMessage;
+    uint8_t payload[8];
+  } CANTxMsg_t;
+  typedef struct
+  {
+    CAN_RxHeaderTypeDef RxMessage;
+    uint8_t payload[8];
+  } CANRxMsg_t;
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus
