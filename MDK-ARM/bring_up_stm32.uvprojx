@@ -610,6 +610,11 @@
               <FileType>1</FileType>
               <FilePath>..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2\cmsis_os2.c</FilePath>
             </File>
+            <File>
+              <FileName>cmsis_os1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2\cmsis_os1.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

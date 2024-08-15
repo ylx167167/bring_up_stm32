@@ -29,7 +29,7 @@ CAN_HandleTypeDef hcan;
 /* CAN init function */
 void MX_CAN_Init(void)
 {
-    //
+    //  36/60/(3+2+1)=0.1Mhz=100bps
     hcan.Instance = CAN1;
     hcan.Init.Prescaler = 60;
     hcan.Init.Mode = CAN_MODE_NORMAL;
@@ -68,8 +68,8 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef *canHandle)
         HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
         /* 使能CAN1中断*/
-        HAL_NVIC_SetPriority(CAN1_RX1_IRQn, 5, 0);
-        HAL_NVIC_EnableIRQ(CAN1_RX1_IRQn);
+        HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 5, 0);
+        HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
     }
 }
 
@@ -86,7 +86,7 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef *canHandle)
         PA12     ------> CAN_TX
         */
         HAL_GPIO_DeInit(GPIOA, GPIO_PIN_11 | GPIO_PIN_12);
-        HAL_NVIC_DisableIRQ(CAN1_RX1_IRQn);
+        HAL_NVIC_DisableIRQ(CAN1_RX0_IRQn);
     }
 }
 

@@ -23,6 +23,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 
+#include "gConfig.h"
 void SystemClock_Config(void);
 
 int fputc(int ch, FILE *f)
@@ -146,7 +147,9 @@ void MX_Init()
  */
 void Local_Init()
 {
-    CAN_Local_Init();
+#if HARDWARE_CAN == 1
+    CAN_Local_Init(); // 初始化CAN
+#endif
 }
 
 /**
@@ -160,7 +163,6 @@ int main(void)
     SystemClock_Config();
     MX_Init();
     Local_Init();
-
     /*2:进入主循环 */
     Start_MyApp_Loop(); // appLoop
 }

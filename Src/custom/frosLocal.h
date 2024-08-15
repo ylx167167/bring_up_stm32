@@ -6,7 +6,7 @@
  *  @param
  *  @return
  */
-void Exp_FreeRtos_CreateTask();
+void Exp_FreeRtos_CreateTask(void);
 
 /**
  *  @brief 初始化FreeRtos的任务队列

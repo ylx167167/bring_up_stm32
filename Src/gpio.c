@@ -40,43 +40,43 @@
 void MX_GPIO_Init(void)
 {
 
-  GPIO_InitTypeDef GPIO_InitStruct = {0};
+    GPIO_InitTypeDef GPIO_InitStruct = {0};
 
-  /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOC_CLK_ENABLE();
-  __HAL_RCC_GPIOD_CLK_ENABLE();
-  __HAL_RCC_GPIOA_CLK_ENABLE();
-  __HAL_RCC_GPIOB_CLK_ENABLE();
+    /* GPIO Ports Clock Enable */
+    __HAL_RCC_GPIOC_CLK_ENABLE();
+    __HAL_RCC_GPIOD_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+    __HAL_RCC_GPIOB_CLK_ENABLE();
 
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
+    /*Configure GPIO pin Output Level */
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_RESET);
+    /*Configure GPIO pin Output Level */
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : PC13 */
-  GPIO_InitStruct.Pin = GPIO_PIN_13;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+    /*Configure GPIO pin : PC13 */
+    GPIO_InitStruct.Pin = GPIO_PIN_13;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PB4 */
-  GPIO_InitStruct.Pin = GPIO_PIN_4;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+    /*Configure GPIO pin : PB4 */
+    GPIO_InitStruct.Pin = GPIO_PIN_4;
+    GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+    GPIO_InitStruct.Pull = GPIO_PULLUP;
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PB5 */
-  GPIO_InitStruct.Pin = GPIO_PIN_5;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+    /*Configure GPIO pin : PB5 */
+    GPIO_InitStruct.Pin = GPIO_PIN_5;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI4_IRQn, 5, 0);
-  HAL_NVIC_EnableIRQ(EXTI4_IRQn);
+    /* EXTI interrupt init*/
+    HAL_NVIC_SetPriority(EXTI4_IRQn, 5, 0);
+    HAL_NVIC_EnableIRQ(EXTI4_IRQn);
 }
 
 /* USER CODE BEGIN 2 */
@@ -87,19 +87,19 @@ void MX_GPIO_Init(void)
  */
 void Set_GPIO_Bit(uint32_t pin, uint32_t bit)
 {
-  uint16_t _pin = 0;
-  switch (pin)
-  {
-  case 4:
-    _pin = GPIO_PIN_4;
-  case 13:
-    _pin = GPIO_PIN_13;
-    break;
-    break;
-  default:
-    return;
-  }
-  bit == 0 ? HAL_GPIO_WritePin(GPIOC, _pin, GPIO_PIN_RESET) : HAL_GPIO_WritePin(GPIOC, _pin, GPIO_PIN_SET);
+    uint16_t _pin = 0;
+    switch (pin)
+    {
+    case 4:
+        _pin = GPIO_PIN_4;
+    case 13:
+        _pin = GPIO_PIN_13;
+        break;
+        break;
+    default:
+        return;
+    }
+    bit == 0 ? HAL_GPIO_WritePin(GPIOC, _pin, GPIO_PIN_RESET) : HAL_GPIO_WritePin(GPIOC, _pin, GPIO_PIN_SET);
 }
 /**
  *  @b Description PB3 中断回调
@@ -117,36 +117,36 @@ void KEY_LEFT_CallBack()
  */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-  static int flag = 0;
-  if (GPIO_Pin == GPIO_PIN_4)
-  {
-    if (flag == 0)
+    static int flag = 0;
+    if (GPIO_Pin == GPIO_PIN_4)
     {
-      Set_GPIO_Bit(13, 0);
-      flag = 1;
+        if (flag == 0)
+        {
+            Set_GPIO_Bit(13, 0);
+            flag = 1;
+        }
+        else
+        {
+            Set_GPIO_Bit(13, 1);
+            flag = 0;
+        }
     }
-    else
-    {
-      Set_GPIO_Bit(13, 1);
-      flag = 0;
-    }
-  }
 }
 void Led_Ctrl(int flag)
 {
-  switch (flag)
-  {
-  case LED_UP_C13:
-    Set_GPIO_Bit(13, 1);
-    break;
-  case LED_DOWM_C13:
-    Set_GPIO_Bit(13, 0);
-    break;
-  case LED_TOGGLE_C13:
-    break;
-  default:
-    break;
-  }
+    switch (flag)
+    {
+    case LED_UP_C13:
+        Set_GPIO_Bit(13, 1);
+        break;
+    case LED_DOWM_C13:
+        Set_GPIO_Bit(13, 0);
+        break;
+    case LED_TOGGLE_C13:
+        break;
+    default:
+        break;
+    }
 }
 /* USER CODE END 2 */
 
